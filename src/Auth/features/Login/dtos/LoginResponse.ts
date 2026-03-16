@@ -1,8 +1,5 @@
-import { ApiResponse } from "@shared/types/api";
-
-type LoginSuccessData = {
+export type LoginResponse = {
+    id: string;
+    username: string;
     token: string;
-    userId: string;
 }
-
-export type LoginResponse = ApiResponse<LoginSuccessData>;
