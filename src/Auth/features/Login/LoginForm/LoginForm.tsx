@@ -28,6 +28,7 @@ import { LoginResponse } from "../dtos/LoginResponse"
 import { redirect } from "next/navigation"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
+import { Result } from "@shared/types/Result"
 
 export function LoginForm({
     className,
@@ -43,14 +44,13 @@ export function LoginForm({
     const handleLogin = (credentials: LoginRequest) => {
 
         mutate(credentials, {
-            onSuccess: (data: LoginResponse) => {
-                if (data.success) {
-                    console.log(data);
+            onSuccess: (res: Result<LoginResponse>) => {
+                if (!res.error) {
+                    console.log(res.data);
                     toast.success("Sesion iniciada con satisfactoriamente.");
                     router.push("/");
-                } else {
-                    toast.error(data.message);
                 }
+                toast.error(res.error);
             },
             onError: (error) => {
                 toast.error(error.message);
