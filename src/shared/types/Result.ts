@@ -1,21 +1,15 @@
-export class Result<T> {
-    public success: boolean;
-    public data: T | null;
-    public error: string | null;
-    public statusCode: number;
+export type Result<T> = {
+    success: boolean;
+    data: T | null;
+    error: string | null;
+    statusCode: number;
+};
 
-    private constructor(success: boolean, data: T | null, error: string | null, statusCode: number) {
-        this.success = success;
-        this.data = data;
-        this.error = error;
-        this.statusCode = statusCode;
-    }
-
-    static success<U>(data: U, statusCode: number): Result<U> {
-        return new Result<U>(true, data, null, statusCode);
-    }
-
-    static fail<U>(error: string, statusCode: number): Result<U> {
-        return new Result<U>(false, null, error, statusCode);
-    }
-}
+export const CreateResult = {
+    success: <T>(data: T, statusCode: number): Result<T> => ({
+        success: true, data, error: null, statusCode
+    }),
+    fail: <T>(error: string, statusCode: number): Result<T> => ({
+        success: false, data: null, error, statusCode
+    }),
+};
