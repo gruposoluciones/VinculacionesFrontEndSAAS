@@ -3,7 +3,7 @@ export type RegisterRequest = {
     email: string
     password: string
     primerNombre: string
-    segundoNombre: string
+    segundoNombre?: string
     apellidoPaterno: string
     apellidoMaterno: string
     fechaNacimiento: string
