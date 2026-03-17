@@ -47,10 +47,9 @@ export function LoginForm({
             onSuccess: (res: Result<LoginResponse>) => {
                 if (!res.error) {
                     console.log(res.data);
-                    toast.success("Sesion iniciada con satisfactoriamente.");
+                    toast.success("Sesion iniciada satisfactoriamente.");
                     router.push("/");
                 }
-                toast.error(res.error);
             },
             onError: (error) => {
                 toast.error(error.message);
