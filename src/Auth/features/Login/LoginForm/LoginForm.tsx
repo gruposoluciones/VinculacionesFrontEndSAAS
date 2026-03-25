@@ -50,6 +50,9 @@ export function LoginForm({
                     toast.success("Sesion iniciada satisfactoriamente.");
                     router.push("/");
                 }
+                if (res.error) {
+                    toast.success(res.error);
+                }
             },
             onError: (error) => {
                 toast.error(error.message);
