@@ -29,6 +29,9 @@
       "@Auth/*": [
         "./src/Auth/*"
       ],
+      "@Dashboard/*": [
+        "./src/Dashboard/*"
+      ],
     }
   },
   "include": [
