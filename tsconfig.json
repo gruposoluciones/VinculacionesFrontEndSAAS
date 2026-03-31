@@ -26,6 +26,9 @@
       "@shared/*": [
         "./src/shared/*"
       ],
+      "@store/*": [
+        "./src/store/*"
+      ],
       "@Auth/*": [
         "./src/Auth/*"
       ],

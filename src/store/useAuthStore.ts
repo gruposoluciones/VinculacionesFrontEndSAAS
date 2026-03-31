@@ -5,8 +5,9 @@ import { persist } from 'zustand/middleware';
 
 const initialStateUser: UserAuth = {
     id: null,
-    role: "",
+    role: null,
     username: null,
+    establishment: null,
 };
 
 const initialStateMenus: MenuItem[] = [];
