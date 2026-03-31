@@ -23,12 +23,12 @@ import { LoginSchema } from "./validations/LoginSchema"
 import { LoginFormErrorAlert } from "./LoginErrorAlert"
 import { useState } from "react"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
-import { useLoginMutation } from "../hooks/useLoginMutation"
-import { LoginResponse } from "../dtos/LoginResponse"
-import { redirect } from "next/navigation"
+import { useLoginMutation } from "@Auth/features/Login/hooks/useLoginMutation"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { Result } from "@shared/types/Result"
+import { useAuthStore } from "@store/useAuthStore"
+import { LoginResponseDto } from "@Auth/features/Login/dtos/LoginResponseDto"
 
 export function LoginForm({
     className,
@@ -40,15 +40,22 @@ export function LoginForm({
     const { handleSubmit, register, formState: { errors } } = useForm<LoginRequest>({
         resolver: zodResolver(LoginSchema),
     });
-
+    const { login, setMenu } = useAuthStore();
     const handleLogin = (credentials: LoginRequest) => {
 
         mutate(credentials, {
-            onSuccess: (res: Result<LoginResponse>) => {
-                if (!res.error) {
+            onSuccess: (res: Result<LoginResponseDto>) => {
+                if (res.data) {
                     console.log(res.data);
                     toast.success("Sesion iniciada satisfactoriamente.");
-                    router.push("/");
+                    login({
+                        id: res.data.id,
+                        role: res.data.role,
+                        username: res.data.username,
+                        establishment: res.data.establishment,
+                    });
+                    setMenu(res.data.menu);
+                    router.push("/dashboard");
                 }
                 if (res.error) {
                     toast.success(res.error);
@@ -106,8 +113,6 @@ export function LoginForm({
                                         )}
                                     </button>
                                 </div>
-
-
                                 <LoginFormErrorAlert title={errors.password?.message} />
                             </Field>
                             <Field>
