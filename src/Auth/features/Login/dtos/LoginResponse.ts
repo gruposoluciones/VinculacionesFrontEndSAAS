@@ -1,5 +1,8 @@
 export type LoginResponse = {
-    id: string;
+    id: number;
     username: string;
     token: string;
+    roles: string;
+    establishments: string;
+    menus: string;
 }

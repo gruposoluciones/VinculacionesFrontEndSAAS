@@ -1,6 +1,10 @@
 export type MenuItem = {
-    name: string;
-    url: string;
-    icon: string;
-    children?: MenuItem[];
+    MenuId: number
+    MenuName: string
+    Route: string
+    ParentId: number | null
+    Read: boolean
+    Created: boolean
+    Updated: boolean
+    Deleted: boolean
 }
